@@ -1,0 +1,15 @@
+build docker image:
+  docker build -t IMAGE_NAME . 
+
+run docker image:
+  docker run -d -p 8000:8000 IMAGE_NAME
+                   your:docker
+
+stop docker container:
+  docker stop [OPTIONS] CONTAINER_NAME
+
+docker list running containers:
+  docker ps
+
+docker list images:
+  docker image list
