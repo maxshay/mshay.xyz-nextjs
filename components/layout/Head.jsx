@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-const MyHead = ({ title }) => {
+const MyHead = ({ title, ogImage }) => {
   return (
     <Head>
       <title>{title}</title>
@@ -19,10 +19,7 @@ const MyHead = ({ title }) => {
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://mshay.xyz" />
       <meta property="og:title" content={title} />
-      <meta
-        property="og:image"
-        content="https://portfolio.insaneblimp.com/images/og-site-main-image.jpg"
-      />
+      <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1280" />
       <meta property="og:image:height" content="720" />
       <meta
@@ -47,6 +44,12 @@ const MyHead = ({ title }) => {
         rel="apple-touch-icon"
         sizes="180x180"
         href="/apple-touch-icon.png"
+      />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:wght@700&family=Hind+Madurai:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
       />
     </Head>
   );

@@ -1,9 +1,29 @@
 import React from "react";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
+
+function ChangeBackgroundColor({ children }) {
+  const { scrollY } = useViewportScroll();
+  const background = useTransform(
+    scrollY,
+    [0, 200],
+    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.95)"]
+  );
+  const padding = useTransform(scrollY, [0, 200], ["1.25rem", "0.45rem"]);
+
+  return (
+    <motion.div
+      className="mx-auto flex flex-wrap flex-col md:flex-row items-center"
+      style={{ background, padding }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 const Nav = () => {
   return (
-    <header className="bg-transparent body-font hidden md:block fixed top-0 w-full capitalize text-white font-semibold text-xl tracking-wide z-50">
-      <div className="mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <header className="body-font hidden md:block fixed top-0 w-full capitalize text-white font-semibold text-xl tracking-wide z-50">
+      <ChangeBackgroundColor>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <a
             href="https://github.com/maxshay"
@@ -22,7 +42,7 @@ const Nav = () => {
             linkedIn
           </a>
         </nav>
-      </div>
+      </ChangeBackgroundColor>
     </header>
   );
 };

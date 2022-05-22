@@ -18,7 +18,7 @@ export default () => {
 
       <aside
         id="nav"
-        style={{ backgroundColor: "rgb(15, 15, 15)" }}
+        style={{ backgroundColor: "rgb(11, 11, 11)" }}
         className={`w-full fixed z-50 h-full transform transition-transform ease-in duration-150 font-medium uppercase${
           open ? "" : " translate-x-full"
         }`}

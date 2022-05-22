@@ -1,11 +1,11 @@
-import Head from "../components/layout/Head";
+import Head from "./layout/Head";
 import styles from "../styles/Projects.module.scss";
 
 import { firestore } from "../utils/firebaseClient";
 import { collection, query, getDocs, orderBy } from "@firebase/firestore";
 
-import Footer from "../components/layout/Footer";
-import ProjectCard from "../components/ProjectCard";
+import Footer from "./layout/Footer";
+import ProjectCard from "./ProjectCard";
 
 // webgl blur balls
 // https://codepen.io/timseverien/pen/jOqPxZQ
