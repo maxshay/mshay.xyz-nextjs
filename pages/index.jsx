@@ -160,7 +160,6 @@ export default function Home({ projects }) {
                 tools
               </h1>
               <ul className="mt-3 md:text-3xl md:leading-10 font-light list-disc list-inside">
-                <li>Javascript</li>
                 <li>Jira</li>
                 <li>Git</li>
                 <li>Cmd / Bash</li>
