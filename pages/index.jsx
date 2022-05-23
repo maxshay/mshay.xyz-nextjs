@@ -4,11 +4,15 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
+import { firestore } from "../utils/firebaseClient";
+import { collection, query, getDocs, orderBy } from "@firebase/firestore";
+
 // components
 import Footer from "../components/layout/Footer";
 import Nav from "../components/layout/Nav";
 import MobileNav from "../components/layout/MobileNav";
-import CopyClipboardButton from "../components/CopyClipboardButton";
+// import CopyClipboardButton from "../components/CopyClipboardButton";
+import GridSquare from "../components/GridSquare";
 import ResumeImage from "../public/Maksim_Shaynyuk_Resume.png";
 
 const texts = ["Software Engineer", "Full stack Developer", "Designer"];
@@ -38,12 +42,12 @@ const variants = {
 
 // https://dribbble.com/search/portfolio
 
-export default function Home() {
+export default function Home({ projects }) {
   const [index, setIndex] = useState(0);
   const textRefs = useRef([]);
 
   useEffect(() => {
-    setTimeout(() => {
+    const a = setTimeout(() => {
       let next = index + 1;
       if (next === texts.length) {
         next = 0;
@@ -54,7 +58,10 @@ export default function Home() {
 
   return (
     <>
-      <Head title="Maksim Shaynyuk | Home" />
+      <Head
+        title="Maksim Shaynyuk | Home"
+        ogImage="https://mshay.xyz/og-site-main-image.jpg"
+      />
       <Nav />
       <MobileNav />
       <section>
@@ -129,7 +136,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="-mt-48 md:-mt-28 mb-4">
+      <section className="-mt-48 md:-mt-20">
         <div className="md:container mx-auto px-4 md:px-0">
           <h1 className="text-center text-4xl font-['Cormorant'] my-8">
             Skills
@@ -176,7 +183,6 @@ export default function Home() {
                 <li>Apollo</li>
                 <li>Redux</li>
                 <li>Axios</li>
-                <li>Recoil</li>
               </ul>
             </div>
             <div className="row-span-2 border border-t-8 border-cyan-500 p-4 md:p-6">
@@ -201,9 +207,64 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mt-20">
+        <div className="md:container mx-auto px-4 md:px-0">
+          <h1 className="text-center text-4xl font-['Cormorant'] my-8">Work</h1>
+          <div className="boxes grid grid-cols-2 md:grid-cols-4">
+            {projects
+              .filter((x) => x.type === "work")
+              .map((p) => (
+                <GridSquare key={p.title} data={p} />
+              ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-20 mb-4">
+        <div className="md:container mx-auto px-4 md:px-0">
+          <h1 className="text-center text-4xl font-['Cormorant'] my-8">
+            Projects
+          </h1>
+          <div className="boxes grid grid-cols-3 md:grid-cols-6">
+            {projects
+              .filter((x) => x.type === "personal")
+              .map((p) => (
+                <GridSquare key={p.title} data={p} />
+              ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const projects = [];
+  let error = null;
+  try {
+    const projectsCollection = collection(firestore, "projects");
+    const q = query(projectsCollection, orderBy("displayOrder"));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      projects.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+  } catch (error) {
+    error = "Cannot get data from server";
+    console.log(" > Cannot get data from server");
+  }
+
+  return {
+    props: {
+      projects,
+      error,
+    },
+  };
 }
 
 // https://framerbook.com/animation/example-animations/4-repeat/

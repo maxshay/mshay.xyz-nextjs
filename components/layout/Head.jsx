@@ -8,7 +8,7 @@ const MyHead = ({ title, ogImage }) => {
       <meta name="title" content={title} />
       <meta
         name="description"
-        content="This is my developer website, created with Next.js"
+        content="My developer website, created with Next.js"
       />
       <meta
         name="keywords"
