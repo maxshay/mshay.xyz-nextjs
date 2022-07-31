@@ -6,14 +6,19 @@ function ChangeBackgroundColor({ children }) {
   const background = useTransform(
     scrollY,
     [0, 200],
-    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.95)"]
+    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.6)"]
+  );
+  const backdropFilter = useTransform(
+    scrollY,
+    [0, 200],
+    ["blur(00px)", "blur(10px)"]
   );
   const padding = useTransform(scrollY, [0, 200], ["1.25rem", "0.45rem"]);
 
   return (
     <motion.div
-      className="mx-auto flex flex-wrap flex-col md:flex-row items-center"
-      style={{ background, padding }}
+      className="mx-auto flex flex-wrap flex-col md:flex-row items-center testing"
+      style={{ background, padding, backdropFilter }}
     >
       {children}
     </motion.div>

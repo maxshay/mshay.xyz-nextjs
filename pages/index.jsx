@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import Head from "../components/layout/Head";
-import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 
+// database
 import { firestore } from "../utils/firebaseClient";
 import { collection, query, getDocs, orderBy } from "@firebase/firestore";
 
@@ -11,9 +11,9 @@ import { collection, query, getDocs, orderBy } from "@firebase/firestore";
 import Footer from "../components/layout/Footer";
 import Nav from "../components/layout/Nav";
 import MobileNav from "../components/layout/MobileNav";
-// import CopyClipboardButton from "../components/CopyClipboardButton";
 import GridSquare from "../components/GridSquare";
-import ResumeImage from "../public/Maksim_Shaynyuk_Resume.png";
+import ResumeImage from "../public/images/Maksim_Shaynyuk_Resume.png";
+import ProjectCard from "../components/ProjectCard";
 
 const texts = ["Software Engineer", "Full stack Developer", "Designer"];
 
@@ -42,7 +42,7 @@ const variants = {
 
 // https://dribbble.com/search/portfolio
 
-export default function Home({ projects }) {
+export default function Home({ projects, error }) {
   const [index, setIndex] = useState(0);
   const textRefs = useRef([]);
 
@@ -60,7 +60,7 @@ export default function Home({ projects }) {
     <>
       <Head
         title="Maksim Shaynyuk | Home"
-        ogImage="https://mshay.xyz/og-site-main-image.jpg"
+        ogImage="https://mshay.xyz/images/og-site-main-image.jpg"
       />
       <Nav />
       <MobileNav />
@@ -205,7 +205,7 @@ export default function Home({ projects }) {
           </div>
         </div>
       </section>
-
+      {/* 
       <section className="mt-20">
         <div className="md:container mx-auto px-4 md:px-0">
           <h1 className="text-center text-4xl font-['Cormorant'] my-8">Work</h1>
@@ -217,20 +217,22 @@ export default function Home({ projects }) {
               ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="mt-20 mb-4">
         <div className="md:container mx-auto px-4 md:px-0">
           <h1 className="text-center text-4xl font-['Cormorant'] my-8">
             Projects
           </h1>
-          <div className="boxes grid grid-cols-3 md:grid-cols-6">
-            {projects
-              .filter((x) => x.type === "personal")
-              .map((p) => (
-                <GridSquare key={p.title} data={p} />
+          {error !== null ? (
+            <p>Could not get projects data :(</p>
+          ) : (
+            <div className="">
+              {projects.map((p) => (
+                <ProjectCard key={p.title} data={p} />
               ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -253,9 +255,8 @@ export async function getStaticProps() {
         ...doc.data(),
       });
     });
-  } catch (error) {
-    error = "Cannot get data from server";
-    console.log(" > Cannot get data from server");
+  } catch (err) {
+    error = err;
   }
 
   return {
