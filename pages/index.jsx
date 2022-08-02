@@ -108,7 +108,7 @@ export default function Home({ projects, error }) {
           </div>
         </div>
       </section>
-      <section className="transform -translate-y-48 md:-translate-y-36">
+      <section className="transform -translate-y-44 md:-translate-y-2">
         <div className="md:container mx-auto px-4 md:px-0">
           <div className="md:w-3/4 mx-auto">
             <div className="text-center mt-12 mb-8 relative">
@@ -136,7 +136,9 @@ export default function Home({ projects, error }) {
           </div>
         </div>
       </section>
-      <section className="-mt-48 md:-mt-20">
+
+      {/* Skils Section */}
+      <section className="-mt-28 md:mt-12 lg:mt-28">
         <div className="md:container mx-auto px-4 md:px-0">
           <h1 className="text-center text-4xl font-['Cormorant'] my-8">
             Skills
@@ -219,7 +221,7 @@ export default function Home({ projects, error }) {
         </div>
       </section> */}
 
-      <section className="mt-20 mb-4">
+      <section className="mt-28 mb-4">
         <div className="md:container mx-auto px-4 md:px-0">
           <h1 className="text-center text-4xl font-['Cormorant'] my-8">
             Projects
