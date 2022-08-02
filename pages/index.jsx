@@ -115,7 +115,7 @@ export default function Home({ projects, error }) {
               <h1 className="text-4xl font-['Cormorant']">Resume</h1>
               <div className="absolute right-0 top-0 h-full flex items-center">
                 <a
-                  href="/files/Maksim_Shaynyuk_Resume.pdf"
+                  href="/files/Maksim Shaynyuk Resume.pdf"
                   className="hidden md:inline-block projectsLink capitalize font-semibold px-3 py-1.5 border rounded bg-cyan-500 border-cyan-500 shadow-lg hover:shadow-cyan-500/50 text-white"
                   download
                 >
