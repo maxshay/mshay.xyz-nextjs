@@ -108,7 +108,7 @@ export default function Home({ projects, error }) {
           </div>
         </div>
       </section>
-      <section className="transform -translate-y-44 md:-translate-y-2">
+      {/* <section className="transform -translate-y-44 md:-translate-y-2">
         <div className="md:container mx-auto px-4 md:px-0">
           <div className="md:w-3/4 mx-auto">
             <div className="text-center mt-12 mb-8 relative">
@@ -135,7 +135,7 @@ export default function Home({ projects, error }) {
             <Image src={ResumeImage} alt="Maksim's Resume" placeholder="blur" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Skils Section */}
       <section className="-mt-28 md:mt-12 lg:mt-28">
