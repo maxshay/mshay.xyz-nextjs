@@ -229,10 +229,12 @@ export default function Home({ projects, error }) {
           {error !== null ? (
             <p>Could not get projects data :(</p>
           ) : (
-            <div className="">
-              {projects.map((p) => (
-                <ProjectCard key={p.title} data={p} />
-              ))}
+            <div>
+              {projects
+                .filter((p) => p.isActive === true)
+                .map((p) => (
+                  <ProjectCard key={p.title} data={p} />
+                ))}
             </div>
           )}
         </div>
