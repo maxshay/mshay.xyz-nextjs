@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Head from "../components/layout/Head";
-import Image from "next/image";
+// import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 // database
@@ -11,8 +11,8 @@ import { collection, query, getDocs, orderBy } from "@firebase/firestore";
 import Footer from "../components/layout/Footer";
 import Nav from "../components/layout/Nav";
 import MobileNav from "../components/layout/MobileNav";
-import GridSquare from "../components/GridSquare";
-import ResumeImage from "../public/images/Maksim_Shaynyuk_Resume.png";
+// import GridSquare from "../components/GridSquare";
+// import ResumeImage from "../public/images/Maksim_Shaynyuk_Resume.png";
 import ProjectCard from "../components/ProjectCard";
 
 const texts = ["Software Engineer", "Full stack Developer", "Designer"];
@@ -251,16 +251,17 @@ export async function getStaticProps() {
   try {
     const projectsCollection = collection(firestore, "projects");
     const q = query(projectsCollection, orderBy("displayOrder"));
-
     const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
     querySnapshot.forEach((doc) => {
       projects.push({
         id: doc.id,
         ...doc.data(),
       });
     });
-  } catch (err) {
-    error = err;
+  } catch (error) {
+    console.error(error);
+    error = error;
   }
 
   return {
